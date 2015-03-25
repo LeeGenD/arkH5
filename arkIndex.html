@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>arkIndex</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, 
+            initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, 
+            user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="./lib/slidePage.css">
+    <link rel="stylesheet" type="text/css" href="./lib/cutyElement.css">
+    <link rel="stylesheet" type="text/css" href="./arkIndex.css">
+
+	<script type="text/javascript" src="./lib/zepto.min.js"></script>
+	<script type="text/javascript" src="./lib/touch.js"></script>
+	<script type="text/javascript" src="./lib/fx.js"></script>
+	<script type="text/javascript" src="./lib/detect.js"></script>
+	<script type="text/javascript" src="./lib/slidePage.js"></script>
+	<script type="text/javascript" src="./lib/cutyElement.js"></script>
+	<script type="text/javascript" src="./lib/canvasLib.js"></script>
+</head>
+<body>
+	<div id="wrap"></div>
+	<script type="text/javascript">
+		var $_GET = (function(){
+		    var url = window.document.location.href.toString();
+		    var u = url.split("?");
+		    if(typeof(u[1]) == "string"){
+		        u = u[1].split("&");
+		        var get = {};
+		        for(var i in u){
+		            var j = u[i].split("=");
+		            get[j[0]] = j[1];
+		        }
+		        return get;
+		    } else {
+		        return {};
+		    }
+		})();
+
+		if( $_GET['debug'] != 'true'){
+			$('#wrap').css({
+				height: $(window).height(),
+				width: 'auto'
+			});
+		}
+
+		var page = new slidePage({
+			'pageconfs': [
+				{
+					// #00FF00 url(bgimage.gif) no-repeat fixed top;
+					bg: 'url("http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page1_middle.png") no-repeat bottom center',
+					style: {
+						'background-size': '100% 100%'
+					}
+				},
+				{
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page2_bg.png'
+				},
+				{
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page4_bg.png'
+				}
+			],
+			'container': $('#wrap')
+		});
+
+		page.addSlideOverEvent( function( pageNow){
+			var $elements = $('.slideChildPage').eq(pageNow).find('.cuty-element');
+			$elements.each( function(){
+				if( $(this).data('animateName')){
+					$(this).addClass($(this).data('animateName')+' animated').show();
+				}
+				else{
+					$(this).show();
+				}
+			});
+		});
+
+		page.addSlideStartEvent( function( before){
+			$('.slideChildPage').eq(before).find('.cuty-element').removeClass('zoomInUp animated').css('display','none');
+		});
+
+		var elesInPageOne = [];
+		var pageElementsList = [
+			[
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						bottom: '66%',
+					},
+					width: 138,
+					height: 125,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page1.png',
+					style: {
+						'background-size': '240px 426px',
+		  				'background-position': '-52px 0px'
+					},
+
+					animateName: 'bounceInUp'
+				},
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						top: '35%',
+					},
+					width: 240,
+					height: 150,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page1.png',
+					style: {
+						'background-size': '240px 426px',
+		  				'background-position': '-240px -146px'
+					},
+
+					animateName: 'bounceIn'
+				},
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						bottom: '6%',
+					},
+					width: 86,
+					height: 30,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page1.png',
+					style: {
+						'background-size': '240px 426px',
+		  				'background-position': '-317px -397px'
+					},
+
+					animateName: 'bounceInUp'
+				}
+			],
+			[
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						top: '1%',
+					},
+					width: 265,
+					height: 370,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page2_2.png',
+					style: {
+						'background-size': '375px 787px',
+		  				'background-position': '0px 0px'
+					},
+
+					animateName: 'bounceInUp'
+				},
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						bottom: -223,
+					},
+					width: 362,
+					height: 411,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page2_2.png',
+					style: {
+						'background-size': '375px 787px',
+		  				'background-position': '-14px -376px'
+					},
+
+					animateName: 'animationRotate'
+				},
+				{
+					elementType: 'base',
+					position:{
+						type: 'middle',
+						bottom: '3%',
+					},
+					text: '<p>与你一起扒光</p><p>贴吧会员劲爆秘密</p>',
+					style: {
+						'text-align': 'center',
+						'color': 'white'
+					},
+
+					animateName: 'bounceIn'
+				},
+			],
+			[
+				{
+					elementType: 'base',
+					position:{
+						top: '3%',
+						left: 0,
+					},
+					width: 196,
+					height: 65,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page4.png',
+					style: {
+						'background-size': '276px 188px',
+		  				'background-position': '0 0'
+					},
+
+					animateName: 'fadeInLeft'
+				},
+				{
+					elementType: 'base',
+					width: 33,
+					position:{
+						left: 0,
+						bottom: 0,
+					},
+					height: 100,
+					bgimg: 'http://tieba.baidu.com/tb/cms/game/tieba_investigate/v1/page4.png',
+					style: {
+						'background-size': '276px 188px',
+		  				'background-position': '-196px 0',
+		  				'z-index': 999
+					},
+
+					animateName: 'fadeInLeft'
+				},
+				{
+					elementType: 'base',
+					width: '100%',
+					position:{
+						left: 0,
+						bottom: 0,
+					},
+					height: 100,
+					text: '贴吧会员是小鲜肉聚集的组织，蛋蛋后跟小鲜肉占了80.4%。大叔如果想约那个啥的话，请优先考虑他们！',
+					style: {
+						'background-size': '276px 188px',
+		  				'background-position': '-196px 0',
+		  				'background-color': 'rgba(0,0,0,0.2)',
+		  				'box-sizing': 'border-box',
+		  				'padding': '15px 15px 15px 48px',
+		  				'color': 'white'
+					},
+
+					animateName: 'fadeInLeft'
+				},
+				{
+					elementType: 'charElement',
+					position:{
+						type: 'middle',
+						left: 0,
+						bottom: '34%',
+					},
+					
+				}
+
+			]
+
+		];
+
+		var pageElements;
+		for( var i=0,n=pageElementsList.length; i<n; i++){
+			pageElements = pageElementsList[ i];
+			for( var j=0,m=pageElements.length; j<m; j++){
+				new cutyElement[pageElements[j]['elementType']](pageElements[ j]).$element
+					.data('animateName', pageElements[ j]['animateName'])
+					.appendTo( page.childPages[i]);
+			}
+			$('.slideChildPage').eq(i).find('.cuty-element').hide();
+		}
+
+	</script>
+</body>
+</html>

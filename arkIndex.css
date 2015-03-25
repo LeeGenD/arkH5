@@ -1,0 +1,10 @@
+body{
+    overflow: hidden;
+   	margin: 0;
+    padding: 0;
+}
+
+#wrap{
+    width: 320px;
+    height: 480px;
+}

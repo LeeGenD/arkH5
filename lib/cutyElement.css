@@ -1,0 +1,44 @@
+.cuty-element{
+	position: absolute;
+}
+.cuty-element-anyposition{
+
+}
+
+.cuty-element-middle{
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+}
+
+.cuty-element .chart-bar{
+	display: inline-block;
+	vertical-align: bottom;
+	position: relative;
+	box-shadow: 2px -2px 2px rgba(0,0,0,0.2);
+}
+
+.cuty-element .chart-bar .chart-bar-name{
+	color: white;
+	position: absolute;
+	bottom: -22px;
+	font-size: 12px;
+	left: 0;
+	white-space:nowrap
+}
+
+.cuty-element .chart-bar .chart-bar-value{
+	position: absolute;
+	top: -20px;
+	font-size: 12px;
+	left: 0;
+	white-space:nowrap
+}
+
+.cuty-element .chart-index{
+	height: 1px;
+	background-color: white;
+	width: 190px;
+	margin: 0 auto;
+}
